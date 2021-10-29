@@ -1,11 +1,12 @@
-const express = require("app");
+const express = require("express");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, { /* options */ });
-app.use(static("public"));
+
+app.use(express.static("public"));
 
 io.on("connection", (socket) => {
   // ...
@@ -14,6 +15,10 @@ io.on("connection", (socket) => {
       socket.disconnect();
     }
   });
+  socket.on('data', (data)=>{
+    console.log(data);
+    io.local.emit('data',data);
+  }) 
 });
 
 httpServer.listen(3000);
