@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
+</head>
+<body>
+    <input type="text" name="name">    
+    <textarea>
+
+    </textarea>
+    <button onclick="send()">Send</button>
+    <script type="javascript">
+        io.on("connection", (socket) => {
+            console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+        });
+
+        // client-side
+        socket.on("connect", () => {
+            console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+        });
+
+        socket.on("disconnect", () => {
+            console.log(socket.id); // undefined
+        });
+
+        socket.on("data", (name, str) => { /* ... */ });
+    </script>
+</body>
+</html>
